@@ -11,7 +11,7 @@ output "public_ip_2" {
 }
 
 output "public_ip_3" {
-    value = azurerm_public_ip.public_ip_3.ip_address
+    value = azurerm_public_ip.public_ip_3.id
 }
 
 output "dvwa_nic_1" {

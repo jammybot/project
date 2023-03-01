@@ -51,14 +51,13 @@ resource "azurerm_linux_virtual_machine" "dvwa_vm_1" {
     storage_account_uri = azurerm_storage_account.project_dvwa.primary_blob_endpoint
   }
 
+  provisioner "file" {
+    source      = "./startupscript.sh"
+    destination = "/tmp/startipscript.sh"
+    
+  }
   provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt install docker docker.io -y",
-      "sudo docker pull jibba/web-dvwa:project",
-      "sudo docker run -d -it -p 80:80 jibba/web-dvwa:project"
+    inline = ["/bin/bash /tmp/startipscript.sh"
     ]
   }
   connection {
@@ -67,7 +66,7 @@ resource "azurerm_linux_virtual_machine" "dvwa_vm_1" {
       user        = "james"
       private_key = file(var.privatekey)
       timeout     = "4m"
-   }
+   } 
 }
 
 resource "azurerm_linux_virtual_machine" "dvwa_vm_2" {
@@ -103,16 +102,18 @@ resource "azurerm_linux_virtual_machine" "dvwa_vm_2" {
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.project_dvwa.primary_blob_endpoint
   }
+
+  provisioner "file" {
+    source      = "./startupscript.sh"
+    destination = "/tmp/startipscript.sh"
+    
+  }
+  
   provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt install docker docker.io -y",
-      "sudo docker pull jibba/web-dvwa:project",
-      "sudo docker run -d -it -p 80:80 jibba/web-dvwa:project"
+    inline = ["/bin/bash /tmp/startipscript.sh"
     ]
   }
+
   connection {
       type        = "ssh"
       host        = self.public_ip_address
