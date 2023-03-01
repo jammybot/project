@@ -9,16 +9,17 @@ resource "aws_instance" "dvwa_instance_1" {
   tags = {
     Name = "dvwa_1"
   }
-    provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt install docker docker.io -y",
-      "sudo docker pull jibba/web-dvwa:project",
-      "sudo docker run -d -it -p 80:80 jibba/web-dvwa:project"
+
+  provisioner "file" {
+    source      = "./startupscript.sh"
+    destination = "/tmp/startipscript.sh"
+  }
+  
+  provisioner "remote-exec" {
+    inline = ["/bin/bash /tmp/startipscript.sh"
     ]
   }
+
   connection {
       type        = "ssh"
       host        = self.public_ip
@@ -26,11 +27,7 @@ resource "aws_instance" "dvwa_instance_1" {
       private_key = file(var.privatekey)
       timeout     = "4m"
    }
-   /* user_data = <<EOF
-#!/bin/bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install docker docker.io -y 
-EOF */
+
   }
 resource "aws_instance" "dvwa_instance_2" {
   ami           = "ami-0d09654d0a20d3ae2" 
@@ -39,22 +36,25 @@ resource "aws_instance" "dvwa_instance_2" {
   associate_public_ip_address = true
   subnet_id = var.project_dvwa_subnet_2
   vpc_security_group_ids = [var.instance_sg]
+
   tags = {
     Name = "dvwa_2"
   }
+
   depends_on = [
     aws_instance.dvwa_instance_1
   ]
+  
+  provisioner "file" {
+    source      = "./startupscript.sh"
+    destination = "/tmp/startipscript.sh"
+  }
+  
   provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt update",
-      "sudo apt install docker docker.io -y",
-      "sudo docker pull jibba/web-dvwa:project",
-      "sudo docker run -d -it -p 80:80 jibba/web-dvwa:project"
+    inline = ["/bin/bash /tmp/startipscript.sh"
     ]
   }
+
   connection {
       type        = "ssh"
       host        = self.public_ip
@@ -62,11 +62,6 @@ resource "aws_instance" "dvwa_instance_2" {
       private_key = file(var.privatekey)
       timeout     = "4m"
    }
-  /* user_data = <<EOF
-#!/bin/bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install docker docker.io -y 
-  EOF */
 }
 resource "aws_key_pair" "deployer" {
   key_name   = "aws_key"
