@@ -1,4 +1,4 @@
-/* # Create a single Compute Engine instance
+# Create a single Compute Engine instance
 resource "google_compute_instance" "dvwa_instance_1" {
   name         = "dvwa-vm-1"
   machine_type = "e2-micro"
@@ -13,10 +13,10 @@ resource "google_compute_instance" "dvwa_instance_1" {
 
   # Install docker
     metadata_startup_script = <<-EOF
-    sudo apt update;
-    sudo apt install docker docker.io -y;
-    sudo docker pull jibba/web-dvwa:project;
-    sudo docker run -d -it -p 80:80 jibba/web-dvwa:project;
+    sudo apt update && \
+    sudo apt install docker docker.io -y && \
+    sudo docker pull jibba/web-dvwa:project && \
+    sudo docker run -d -it -p 80:80 jibba/web-dvwa:project
     EOF
 
   network_interface {
@@ -45,10 +45,11 @@ resource "google_compute_instance" "dvwa_instance_2" {
 
   # Install docker
   metadata_startup_script = <<-EOF
-    sudo apt update;
-    sudo apt install docker docker.io -y;
-    sudo docker pull jibba/web-dvwa:project;
-    sudo docker run -d -it -p 80:80 jibba/web-dvwa:project;
+    !/bin/bash
+    sudo apt update && \
+    sudo apt install docker docker.io -y && \
+    sudo docker pull jibba/web-dvwa:project && \
+    sudo docker run -d -it -p 80:80 jibba/web-dvwa:project
     EOF
   
   
@@ -67,18 +68,18 @@ resource "google_compute_instance" "dvwa_instance_2" {
 resource "google_compute_instance_group" "dvwa-backend" {
   name        = "dvwa-backend"
   description = "dvwa-backend"
-
+  zone = "europe-west2-a"
   instances = [google_compute_instance.dvwa_instance_1.id, google_compute_instance.dvwa_instance_2.id]
 
   named_port {
     name = "http"
     port = "80"
   }
-  zone = "europe-west2-a"
-} */
+  
+} 
 
 
-resource "google_compute_instance_template" "template" {
+/* resource "google_compute_instance_template" "template" {
   name         = "dvwa-vm-1"
   machine_type = "e2-micro"
   #zone         = "europe-west2-a"
@@ -125,4 +126,4 @@ resource "google_compute_instance_group_manager" "default" {
   }
   base_instance_name = "vm"
   target_size        = 2
-}
+}  */

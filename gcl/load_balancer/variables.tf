@@ -5,3 +5,7 @@ variable "instance_group" {
 variable "public_ip" {
   type = string
 }
+
+variable "dvwa_waf_policy" {
+  type = string
+}

@@ -31,14 +31,28 @@ resource "google_compute_firewall" "default" {
   name          = "fw-allow-health-check"
   direction     = "INGRESS"
   network       = google_compute_network.network.id
-  priority      = 1001
-  source_ranges = ["130.211.0.0/22", "35.191.0.0/16","92.237.154.94/32"]
+  priority      = 1000
+  source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
   target_tags   = ["allow-health-check"]
   allow {
     ports    = ["80"]
     protocol = "tcp"
   }
 }
+
+resource "google_compute_firewall" "allow-http-from-lb" {
+  name       = "allow-http-from-lb"
+  direction  = "INGRESS"
+  network    = google_compute_network.network.id
+  priority   = 1000
+  source_ranges = ["${google_compute_global_address.default.address}/32","92.237.154.94/32", "0.0.0.0/0"]
+  target_tags   = ["instance-firewall"]
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+}
+
 resource "google_compute_global_address" "default" {
   name       = "lb-ipv4-1"
   ip_version = "IPV4"

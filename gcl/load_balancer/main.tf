@@ -21,6 +21,7 @@ resource "google_compute_backend_service" "default" {
   protocol                        = "HTTP"
   session_affinity                = "NONE"
   timeout_sec                     = 30
+  security_policy = var.dvwa_waf_policy
   backend {
     group           = var.instance_group
     balancing_mode  = "UTILIZATION"
