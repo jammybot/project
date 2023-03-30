@@ -3,7 +3,7 @@ resource "google_compute_instance" "dvwa_instance_1" {
   name         = "dvwa-vm-1"
   machine_type = "e2-micro"
   zone         = "europe-west2-a"
-  tags         = ["instance-firewall","allow-health-check"]
+  tags         = ["allow-http-from-lb","allow-health-check","allow-ssh"]
 
   boot_disk {
     initialize_params {
@@ -35,7 +35,7 @@ resource "google_compute_instance" "dvwa_instance_2" {
     name         = "dvwa-vm-2"
     machine_type = "e2-micro"
     zone         = "europe-west2-a"
-    tags         = ["instance-firewall","allow-health-check"]
+    tags         = ["allow-http-from-lb","allow-health-check","allow-ssh"]
 
   boot_disk {
     initialize_params {
