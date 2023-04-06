@@ -16,6 +16,5 @@ module "waf" {
 
 module "vm" {
   source = "./vm"
-  /* nic_1 = module.network.nic_1*/
   nic_2 = module.network.nic_2 
 }

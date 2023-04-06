@@ -1,7 +1,5 @@
 module "network" {
   source = "./network"
-  /* dvwa_instance_1 = module.vm.dvwa_instance_1
-  dvwa_instance_2 = module.vm.dvwa_instance_2 */
 }
 
 module "loadbalancer" {
@@ -19,9 +17,6 @@ module "vm" {
   project_dvwa_subnet_1 =  module.network.project_dvwa_subnet_1
   project_dvwa_subnet_2 =  module.network.project_dvwa_subnet_2
   instance_sg = module.network.instance_sg
-  /* nic_1 = module.network.nic_1
-  nic_2 = module.network.nic_2 */
-
 }
 
 module "waf" {
