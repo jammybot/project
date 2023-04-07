@@ -71,7 +71,7 @@ resource "aws_security_group" "lb_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["92.237.154.94/32"]
+    cidr_blocks = ["92.237.154.94/32","94.11.48.7/32"]
     description = "http access"
   }
   tags = {
@@ -88,7 +88,7 @@ resource "aws_security_group" "instance_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["92.237.154.94/32"]
+    cidr_blocks = ["92.237.154.94/32","94.11.48.7/32"]
     description = "SSH access"
 
   }
