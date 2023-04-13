@@ -1,5 +1,5 @@
 resource "aws_instance" "dvwa_instance_1" {
-  ami           = "ami-0d09654d0a20d3ae2"
+  ami           = "ami-09744628bed84e434"
   instance_type = "t2.micro"
   key_name = aws_key_pair.deployer.id
   associate_public_ip_address = true
@@ -30,7 +30,7 @@ resource "aws_instance" "dvwa_instance_1" {
 
   }
 resource "aws_instance" "dvwa_instance_2" {
-  ami           = "ami-0d09654d0a20d3ae2" 
+  ami           = "ami-09744628bed84e434" 
   instance_type = "t2.micro"
   key_name = aws_key_pair.deployer.id
   associate_public_ip_address = true
@@ -40,10 +40,6 @@ resource "aws_instance" "dvwa_instance_2" {
   tags = {
     Name = "dvwa_2"
   }
-
-  depends_on = [
-    aws_instance.dvwa_instance_1
-  ]
   
   provisioner "file" {
     source      = "./startupscript.sh"

@@ -24,7 +24,7 @@ resource "google_compute_firewall" "instance-firewall" {
   direction     = "INGRESS"
   network       = google_compute_network.network.id
   priority      = 1000
-  source_ranges = ["92.237.154.94/32"]
+  source_ranges = ["92.237.154.94/32","94.11.48.7/32"]
   target_tags   = ["allow-ssh"]
 }
 resource "google_compute_firewall" "default" {
@@ -45,7 +45,7 @@ resource "google_compute_firewall" "allow-http-from-lb" {
   direction  = "INGRESS"
   network    = google_compute_network.network.id
   priority   = 1000
-  source_ranges = ["${google_compute_global_address.default.address}/32","92.237.154.94/32"]
+  source_ranges = ["${google_compute_global_address.default.address}/32","92.237.154.94/32","94.11.48.7","130.211.0.0/22", "35.191.0.0/16"]
   target_tags   = ["allow-http-from-lb"]
   allow {
     protocol = "tcp"

@@ -7,11 +7,11 @@ variable "project_dvwa_subnet_2" {
 }
 
 variable "privatekey" {
-  default = "/home/james/.ssh/james"
+  default = "/home/james/.ssh/aws"
 }
 
 variable "public_key" {
-  default = "/home/james/.ssh/james.pub"
+  default = "/home/james/.ssh/aws.pub"
 }
 
 variable "instance_sg" {

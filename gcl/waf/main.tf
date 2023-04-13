@@ -19,7 +19,7 @@
     priority = 1
     match {
       expr {
-        expression = "evaluatePreconfiguredWaf('sqli-v33-stable', {'sensitivity': 2})"
+        expression = "evaluatePreconfiguredWaf('sqli-v33-stable')"
         }
     }
     
@@ -30,7 +30,7 @@
     priority = 2
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('xss-v33-stable')"
         }
 
     }
@@ -41,7 +41,7 @@
     priority = 3
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
+            expression = "evaluatePreconfiguredWaf('lfi-v33-stable')"
         }
 
     }
@@ -52,7 +52,7 @@
     priority = 4
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('rce-v33-stable', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('rce-v33-stable')"
         }
 
     }
@@ -63,7 +63,7 @@
     priority = 5
     match {
         expr {
-            expression = " 	evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
+            expression = " 	evaluatePreconfiguredWaf('rfi-v33-stable')"
         }
 
     }
@@ -74,7 +74,7 @@
     priority = 6
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
+            expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable')"
         }
 
     }
@@ -85,7 +85,7 @@
     priority = 7
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable')"
         }
 
     }
@@ -96,7 +96,7 @@
     priority = 8
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('php-v33-stable')"
         }
 
     }
@@ -107,7 +107,7 @@
     priority = 9
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
+            expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable')"
         }
 
     }
@@ -118,7 +118,7 @@
     priority = 10
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('java-v33-stable', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('java-v33-stable')"
         }
 
     }
@@ -129,7 +129,7 @@
     priority = 11
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('nodejs-v33-stable', {'sensitivity': 1})"
+            expression = "evaluatePreconfiguredWaf('nodejs-v33-stable')"
         }
 
     }
@@ -140,7 +140,7 @@
     priority = 12
     match {
         expr {
-            expression = "evaluatePreconfiguredWaf('cve-canary', {'sensitivity': 2})"
+            expression = "evaluatePreconfiguredWaf('cve-canary')"
         }
 
     }
@@ -151,6 +151,16 @@
     match {
         expr {
             expression = "evaluatePreconfiguredWaf('json-sqli-canary', {'sensitivity':0, 'opt_in_rule_ids': ['owasp-crs-id942550-sqli']})"
+        }
+
+    }
+  }
+  rule {
+    action   = "deny(403)"
+    priority = 14
+    match {
+        expr {
+            expression = "int(request.headers['content-length']) >= 8192"
         }
 
     }
