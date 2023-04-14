@@ -24,7 +24,8 @@ resource "google_compute_firewall" "instance-firewall" {
   direction     = "INGRESS"
   network       = google_compute_network.network.id
   priority      = 1000
-  source_ranges = ["92.237.154.94/32","94.11.48.7/32"]
+  #ip redacted
+  source_ranges = [""]
   target_tags   = ["allow-ssh"]
 }
 resource "google_compute_firewall" "default" {

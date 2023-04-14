@@ -72,7 +72,8 @@ resource "azurerm_network_security_group" "project_nsg_1" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes = ["92.237.154.94/32", "94.11.48.7"]
+    #ip redacted
+    source_address_prefixes = [""]
     destination_address_prefix = "*"
   }
 }
