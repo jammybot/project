@@ -1,3 +1,4 @@
+#Code is referenced (Trussworks, n.d.).  
 variable "managed_rules" {
   type = list(object({
     name            = string

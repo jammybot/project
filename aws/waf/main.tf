@@ -1,3 +1,4 @@
+#Code is referenced (Trussworks, n.d.).  
 resource "aws_wafv2_web_acl" "waf_acl" {
   name        = "managed-rule-groups"
   scope       = "REGIONAL"

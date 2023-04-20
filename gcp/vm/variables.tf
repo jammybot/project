@@ -1,7 +1,3 @@
-/* variable "nic_1" {
-  type = string
-}*/
-
 variable "nic_2" {
   type = string
 } 
